@@ -5,6 +5,8 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  InputRightElement,
+  CloseButton,
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 
@@ -34,6 +36,17 @@ export const Search = () => {
               setSearch(e.target.value);
             }}
           />
+          {search && (
+            <InputRightElement
+              children={
+                <CloseButton
+                  variant="solid"
+                  color="gray.500"
+                  onClick={() => setSearch('')}
+                />
+              }
+            />
+          )}
         </InputGroup>
       </Stack>
     </CardSection>
