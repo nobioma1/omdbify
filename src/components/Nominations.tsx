@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from 'react';
-import { Stack, Text } from '@chakra-ui/react';
+import { Button, Stack, Text } from '@chakra-ui/react';
 
 import { Context as NominationContext } from '../contexts/NominationContext';
 import { MovieListItem } from './MovieListItem';
 import { CardSection } from './shared/CardSection';
+import { DeleteIcon } from '@chakra-ui/icons';
 
 const KEY = 'save_nominations';
 
@@ -11,7 +12,10 @@ export const Nominations = () => {
   const {
     state: { nominations },
     setNominations,
+    clearAllNominations,
   } = useContext(NominationContext);
+
+  const hasNominations = Object.keys(nominations).length > 0;
 
   useEffect(() => {
     const loadNominations = () => {
@@ -40,8 +44,24 @@ export const Nominations = () => {
   }, [nominations]);
 
   return (
-    <CardSection title="Nominations" gridArea="nominations">
-      {Object.keys(nominations).length === 0 ? (
+    <CardSection
+      title="Nominations"
+      gridArea="nominations"
+      titleBtn={
+        hasNominations ? (
+          <Button
+            size="sm"
+            rightIcon={<DeleteIcon />}
+            colorScheme="red"
+            variant="outline"
+            onClick={clearAllNominations}
+          >
+            Clear
+          </Button>
+        ) : null
+      }
+    >
+      {!hasNominations ? (
         <Text textAlign="center">You've not added any nomination</Text>
       ) : (
         <Stack>
