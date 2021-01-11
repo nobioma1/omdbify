@@ -4,11 +4,26 @@ import { Stack, Text } from '@chakra-ui/react';
 import { Context as NominationContext } from '../contexts/NominationContext';
 import { MovieListItem } from './MovieListItem';
 import { CardSection } from './shared/CardSection';
+
+const KEY = 'save_nominations';
+
 export const Nominations = () => {
   const {
     state: { nominations },
     setNominations,
   } = useContext(NominationContext);
+
+  useEffect(() => {
+    const loadNominations = () => {
+      const data = window.localStorage.getItem(KEY);
+      if (data) {
+        const loaded = JSON.parse(data);
+        setNominations(loaded);
+      }
+    };
+
+    loadNominations();
+  }, []);
 
   return (
     <CardSection title="Nominations" gridArea="nominations">
