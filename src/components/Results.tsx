@@ -70,7 +70,7 @@ export const Results = () => {
       {isLoading ? (
         <MovieListItemLoading />
       ) : movies.length === 0 ? (
-        <Text textAlign="center">
+        <Text textAlign="center" color="gray.600">
           {search
             ? `Cannot find movie with title "${search}"`
             : 'Enter a movie title in the search bar'}

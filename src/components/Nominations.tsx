@@ -62,7 +62,9 @@ export const Nominations = () => {
       }
     >
       {!hasNominations ? (
-        <Text textAlign="center">You've not added any nomination</Text>
+        <Text textAlign="center" color="gray.600">
+          You've not added any nomination
+        </Text>
       ) : (
         <Stack>
           {Object.values(nominations).map((movie) => (
