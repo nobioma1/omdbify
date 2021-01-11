@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Alert, AlertIcon, Flex, Text } from '@chakra-ui/react';
+import { Alert, AlertIcon, Fade, Box } from '@chakra-ui/react';
 
 import { Context as nominationsContext } from '../contexts/NominationContext';
 
@@ -9,9 +9,13 @@ export const Banner = () => {
   } = useContext(nominationsContext);
 
   return maxNomination ? (
-    <Alert status="info" gridArea="banner" width="100%">
-      <AlertIcon />
-      You have reached the allowed maximum of 5 nominations
-    </Alert>
+    <Box gridArea="banner">
+      <Fade in={maxNomination}>
+        <Alert status="info">
+          <AlertIcon />
+          You have reached the allowed maximum of 5 nominations
+        </Alert>
+      </Fade>
+    </Box>
   ) : null;
 };
