@@ -1,13 +1,19 @@
-import { Box, Divider, Grid, Heading } from '@chakra-ui/react';
 import React from 'react';
+import { Box, Divider, Flex, Grid, Heading } from '@chakra-ui/react';
 
 interface ICardSection {
   children: React.ReactNode;
   title?: string;
   gridArea?: string;
+  titleBtn?: React.ReactNode;
 }
 
-export const CardSection = ({ children, title, ...styles }: ICardSection) => {
+export const CardSection = ({
+  children,
+  title,
+  titleBtn,
+  ...styles
+}: ICardSection) => {
   return (
     <Grid
       {...styles}
@@ -19,9 +25,16 @@ export const CardSection = ({ children, title, ...styles }: ICardSection) => {
     >
       {title && (
         <Box marginBottom={3}>
-          <Heading as="h3" fontSize="1.15rem">
-            {title}
-          </Heading>
+          <Flex
+            justifyContent="space-between"
+            alignItems="center"
+            minHeight="45px"
+          >
+            <Heading as="h3" fontSize="1.15rem">
+              {title}
+            </Heading>
+            {titleBtn}
+          </Flex>
           <Divider />
         </Box>
       )}
