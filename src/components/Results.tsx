@@ -20,7 +20,7 @@ export const Results = () => {
   const doToast = useToast();
 
   const { doRequest } = useRequest({
-    url: 'http://www.omdbapi.com',
+    url: 'https://www.omdbapi.com',
     method: 'GET',
   });
 
