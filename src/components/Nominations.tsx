@@ -25,6 +25,20 @@ export const Nominations = () => {
     loadNominations();
   }, []);
 
+  useEffect(() => {
+    const saveNominations = () => {
+      if (Object.keys(nominations).length !== 0) {
+        window.localStorage.setItem(KEY, JSON.stringify(nominations));
+      } else {
+        window.localStorage.removeItem(KEY);
+      }
+    };
+    window.addEventListener('beforeunload', saveNominations);
+    return () => {
+      window.removeEventListener('beforeunload', saveNominations);
+    };
+  }, [nominations]);
+
   return (
     <CardSection title="Nominations" gridArea="nominations">
       {Object.keys(nominations).length === 0 ? (
