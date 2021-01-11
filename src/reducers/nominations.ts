@@ -4,6 +4,7 @@ export enum nominationsActionTypes {
   SET_NOMINATIONS = 'SET_NOMINATIONS',
   SET_NOMINATION = 'SET_NOMINATION',
   REMOVE_NOMINATION = 'REMOVE_NOMINATION',
+  CLEAR_ALL_NOMINATIONS = 'CLEAR_ALL_NOMINATIONS',
 }
 
 interface IAction {
@@ -49,6 +50,13 @@ export const nominations = (state: INominationsState, action: IAction) => {
         ...state,
         nominations: { ...remaining },
         maxNomination: isMaximum(remaining),
+      };
+
+    case nominationsActionTypes.CLEAR_ALL_NOMINATIONS:
+      return {
+        ...state,
+        nominations: {},
+        maxNomination: false,
       };
     default:
       return state;
