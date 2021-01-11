@@ -11,6 +11,7 @@ interface IActions {
   ) => (nominations: INominationsState) => void;
   nominate: (dispatch: React.Dispatch<any>) => (movie: IMovie) => void;
   removeNomination: (dispatch: React.Dispatch<any>) => (id: string) => void;
+  clearAllNominations: (dispatch: React.Dispatch<any>) => () => void;
 }
 
 const setNominations = (dispatch: React.Dispatch<any>) => (
@@ -36,11 +37,17 @@ const removeNomination = (dispatch: React.Dispatch<any>) => (id: string) => {
   });
 };
 
+const clearAllNominations = (dispatch: React.Dispatch<any>) => () => {
+  dispatch({
+    type: nominationsActionTypes.CLEAR_ALL_NOMINATIONS,
+  });
+};
+
 export const { Provider, Context } = createDataContext<
   IActions,
   INominationsState
 >(
   nominationsReducer,
-  { setNominations, nominate, removeNomination },
+  { setNominations, nominate, removeNomination, clearAllNominations },
   { nominations: {}, maxNomination: false }
 );
